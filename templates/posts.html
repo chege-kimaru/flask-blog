@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.google.com/?selection.family=Courgette">
+    <link rel="stylesheet" href="https://fonts.google.com/?selection.family=Playfair+Display+SC">
+    <link rel="stylesheet" href="https://fonts.google.com/?selection.family=Playfair+Display+SC">
+
+</head>
+<body>
+<div class="container" style="background-color: orange; border-radius: 3%">
+    <ul class="nav nav-pills">
+         <li><a href="/">Home</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Sign In</a></li>
+        <li><a href="/blogs">Blogs</a></li>
+        <li><a href="/blogs/new">Add Blog</a></li>
+        <li class="active"><a href="/posts/{{ blog_id }}">Posts</a></li>
+        <li><a href="/posts/new/{{ blog_id }}">Add Post</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</div>
+<h1 class="text-center text-primary">{{ blog_title }}'s blogs</h1>
+<div class="container">
+    {% if posts|length > 0 %}
+    {% for post in posts %}
+    <div class="col-lg-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="font-family: Lobster, Monospace"><h2>{{ post.title }}</h2></div>
+            <div class="panel-body">
+                <p style="color: #9933ff; font-size:150%; font-family:Courgette, Monospace ">{{ post.content }}</p>
+                <p style="color: #ff3385">{{ post.date_added }} </p>
+                <p><em><b>~{{ post.author }}~</b></em></p>
+                 <a href="/posts/delete/{{ blog_id }}/{{ post.id }}"><button class="btn btn-danger">Delete Post</button></a>
+                <hr>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h4>There aren't any posts yet</h4>
+    {% endif %}
+</div>
+</body>
+</html>

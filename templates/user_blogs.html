@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.google.com/?selection.family=Courgette">
+    <link rel="stylesheet" href="https://fonts.google.com/?selection.family=Playfair+Display+SC">
+    <title>Blogs</title>
+</head>
+<body>
+<div class="container" style="background-color: orange; border-radius: 3%">
+    <ul class="nav nav-pills">
+        <li><a href="/">Home</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Sign In</a></li>
+        <li class="active"><a href="/blogs">Blogs</a></li>
+        <li><a href="/blogs/new">New Blog</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</div>
+<h1 class="text-center text-primary">{{ author }}'s blogs</h1>
+<div class="container">
+    {% for blog in blogs %}
+    <div class="col-sm-4">
+        <div class="panel panel-info">
+            <div class="panel-heading"><h2><a href="/posts/{{ blog.id }}" style="font-family: Lobster, Monospace;"> {{ blog.title }} </a></h2></div>
+            <div class="panel-body">
+                <p style="color: #9933ff; font-size:150%; font-family: Courgette, Monospace;">{{ blog.description }}</p>
+                <p style="color: #ff3385">{{ blog.date_added }}</p>
+                <p><b><em>{{ blog.author }}</em></b></p>
+                <a href="/blogs/delete/{{ blog.id }}">
+                    <button class="btn btn-danger">Delete Blog</button>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</body>
+</html>

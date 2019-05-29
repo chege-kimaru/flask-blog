@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Post</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.google.com/?selection.family=Courgette">
+    <link rel="stylesheet" href="https://fonts.google.com/?selection.family=Playfair+Display+SC">
+    <style>
+        body {
+            background-image: url("/static/5.jpg");
+            background-repeat: no-repeat;
+            background-position: right top;
+            background-attachment: fixed;
+        }
+        #email {
+            margin-top: 20%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container" style="background-color: orange; border-radius: 3%">
+    <ul class="nav nav-pills">
+         <li><a href="/">Home</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Sign In</a></li>
+        <li><a href="/blogs">Blogs</a></li>
+        <li><a href="/blogs/new">Add Blog</a></li>
+        <li><a href="/posts/{{ blog_id }}">Posts</a></li>
+        <li class="active"><a href="/posts/new/{{ blog_id }}">Add Post</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</div>
+<h1 class="text-center text-primary">Add a post</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3" id="email">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for item in messages %}
+            <h3 class="text-danger">{{ item }}</h3>
+            {% endfor %}
+
+            {% endif %}
+
+            {% endwith %}
+            <form action="/posts/new/{{ blog_id }}" id="new-post" method="post">
+                {{ form.hidden_tag() }}
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field(placeholder = field.label.text, class_="form-control") }}
+                </div>
+                {% if field.errors %}
+                {% for error in field.errors %}
+                <p class="text-danger">
+                    {{ error }}
+                </p>
+                {% endfor %}
+
+                {% endif %}
+                {% endfor %}
+                <button class="btn btn-primary btn-block" type="submit">Add Post</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

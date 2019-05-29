@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.google.com/?selection.family=Courgette">
+    <link rel="stylesheet" href="https://fonts.google.com/?selection.family=Playfair+Display+SC">
+    <style>
+        body {
+            background-image: url("/static/2.jpg");
+            background-repeat: no-repeat;
+            background-position: right top;
+            background-attachment: fixed;
+        }
+        #email {
+            margin-top: 10%;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container" style="background-color: orange; border-radius: 3%; font-size: 30px; font-family: Playfair Display, Monospace">
+    <ul class="nav nav-pills">
+        <li><a href="/">Home</a></li>
+        <li class="active"><a href="/register">Register</a></li>
+        <li><a href="/login">Sign In</a></li>
+        <li><a href="/blogs">Blogs</a></li>
+        <li><a href="/blogs/new">New Blog</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3" id="email">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for item in messages %}
+            <h3 class="text-danger">{{ item }}</h3>
+            {% endfor %}
+
+            {% endif %}
+
+            {% endwith %}
+            <form action="" method="post" role="form">
+                {{ form.hidden_tag() }}
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field(placeholder = field.label.text, class_="form-control") }}
+                </div>
+                {% if field.errors %}
+                {% for error in field.errors %}
+                <p class="text-danger">
+                    {{ error }}
+                </p>
+                {% endfor %}
+
+                {% endif %}
+                {% endfor %}
+                <button class="btn btn-info btn-block" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
